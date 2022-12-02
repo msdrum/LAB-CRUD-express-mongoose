@@ -4,7 +4,7 @@ const purchaseSchema = new Schema({
   shippingAdress: {
     type: String,
   },
-  album: { type: Schema.Types.ObjectId, ref: "Album" },
+  album: [{ type: Schema.Types.ObjectId, ref: "Album" }],
 });
 
 const PurchaseModel = model("Purchase", purchaseSchema);

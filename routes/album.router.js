@@ -39,7 +39,7 @@ albumRoute.get("/albums/:albumId", async (req, res) => {
     const album = await AlbumModel.findById(albumId);
 
     if (!album) {
-      return res.status(400).json({ msg: " User not found" });
+      return res.status(400).json({ msg: " Album not found" });
     }
 
     return res.status(200).json(album);
@@ -61,6 +61,24 @@ albumRoute.put("/albums/:albumId", async (req, res) => {
     );
 
     return res.status(200).json(albumUpdated);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.errors);
+  }
+});
+
+//DELETE ALBUM BY ID
+albumRoute.delete("/albums/:albumId", async (req, res) => {
+  try {
+    const { albumId } = req.params;
+
+    const albumDeleted = await AlbumModel.findByIdAndDelete(albumId);
+
+    if (!albumDeleted) {
+      return res.status(400).json({ msg: "Album not found!" });
+    }
+
+    return res.status(204).json();
   } catch (error) {
     console.log(error);
     return res.status(500).json(error.errors);

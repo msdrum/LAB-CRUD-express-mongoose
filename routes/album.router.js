@@ -19,6 +19,18 @@ albumRoute.post("/create-album", async (req, res) => {
   }
 });
 
+//GET ALBUMS
+albumRoute.get("/albums", async (req, res) => {
+  try {
+    const albums = await AlbumModel.find({});
+
+    return res.status(200).json(albums);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.errors);
+  }
+});
+
 //GET ALBUM BY ID
 albumRoute.get("/albums/:albumId", async (req, res) => {
   try {

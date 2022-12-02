@@ -6,3 +6,7 @@ const purchaseSchema = new Schema({
   },
   album: { type: Schema.Types.ObjectId, ref: "Album" },
 });
+
+const PurchaseModel = model("Purchase", purchaseSchema);
+
+export default PurchaseModel;

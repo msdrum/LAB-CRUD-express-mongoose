@@ -49,5 +49,23 @@ albumRoute.get("/albums/:albumId", async (req, res) => {
   }
 });
 
+//EDIT ALBUM
+albumRoute.put("/albums/:albumId", async (req, res) => {
+  try {
+    const { albumId } = req.params;
+
+    const albumUpdated = await AlbumModel.findByIdAndUpdate(
+      albumId,
+      { ...req.body },
+      { new: true, runValidators: true }
+    );
+
+    return res.status(200).json(albumUpdated);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.errors);
+  }
+});
+
 //EXPORT
 export default albumRoute;

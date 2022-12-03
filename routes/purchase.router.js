@@ -16,7 +16,7 @@ purchaseRoute.post("/purchases/:albumId", async (req, res) => {
       album: albumId,
     });
 
-    console.log(newPurchase);
+    // console.log(newPurchase);
     return res.status(201).json(newPurchase);
   } catch (error) {
     console.log(error);
@@ -25,7 +25,19 @@ purchaseRoute.post("/purchases/:albumId", async (req, res) => {
 });
 
 //GET /purchases/:purchaseId
-// purchaseRoute.get();
+purchaseRoute.get("/purchases/:purchaseId", async (req, res) => {
+  try {
+    const { purchaseId } = req.params;
+
+    const purchase = await PurchaseModel.findById(purchaseId).populate("album");
+
+    // console.log(purchase);
+    return res.status(200).json(purchase);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.errors);
+  }
+});
 
 //EXPORT
 export default purchaseRoute;

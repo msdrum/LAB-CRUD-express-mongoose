@@ -15,7 +15,7 @@ app.use(express.json());
 // SUAS ROTAS AQUI!!! v v v não esqueça de importá-las!
 app.use("/albums", albumRoute);
 
-app.use("purchase", purchaseRoute);
+app.use("/purchase", purchaseRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server up and running on port: ${process.env.PORT}!`);
